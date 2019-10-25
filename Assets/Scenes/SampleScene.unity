@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 843065309428129942, guid: 75422f42ed6379d4fbb2afda88a1df6c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.943
       objectReference: {fileID: 0}
     - target: {fileID: 843065309428129942, guid: 75422f42ed6379d4fbb2afda88a1df6c,
         type: 3}
@@ -288,7 +288,7 @@ PrefabInstance:
     - target: {fileID: 843065309428129942, guid: 75422f42ed6379d4fbb2afda88a1df6c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 843065309428129942, guid: 75422f42ed6379d4fbb2afda88a1df6c,
         type: 3}
@@ -334,6 +334,81 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList123.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList1.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList2.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList1.Array.data[0].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList1.Array.data[1].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList1.Array.data[2].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList1.Array.data[2].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList1.Array.data[4].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList1.Array.data[5].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList2.Array.data[0].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList2.Array.data[1].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList2.Array.data[2].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList2.Array.data[3].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList2.Array.data[4].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
+        type: 3}
+      propertyPath: shapeList2.Array.data[4].y
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75422f42ed6379d4fbb2afda88a1df6c, type: 3}
