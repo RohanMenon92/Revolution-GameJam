@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     public List<Vector2> shapeList2;
 
     int currShapeIndex = 0;
+    bool rotating = false;
+    bool moving = false;
+
+
     List<List<Vector2>> shapeList;
     Sequence crowdMove;
-
     SpriteRenderer[] gridElements;
-
     CrowdController[] crowds;
     /// <summary>
     /// Will have the code for:
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
         // Local element declaration
         gridElements = GetComponentInChildren<PlayerGrid>().GetComponentsInChildren<SpriteRenderer>();
 
-        foreach(SpriteRenderer gridElement in gridElements)
+        foreach (SpriteRenderer gridElement in gridElements)
         {
             gridElement.color = new Color(1f, 1f, 1f, 0f);
         }
@@ -55,6 +57,71 @@ public class PlayerController : MonoBehaviour
         {
             ChangeShape();
         }
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            RotateRight();
+        }
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            RotateLeft();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MoveLeft();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            MoveRight();
+        }
+    }
+
+    void MoveLeft()
+    {
+        if (!rotating)
+        {
+            moving = true;
+            transform.DOLocalMove((transform.localPosition + new Vector3(-1f, 0, 0)), 0.25f).OnComplete(MoveComplete).SetEase(Ease.OutQuad);
+        }
+
+    }
+
+    void MoveRight()
+    {
+        if (!moving)
+        {
+            moving = true;
+            transform.DOLocalMove((transform.localPosition + new Vector3(1f, 0, 0)), 0.25f).OnComplete(MoveComplete).SetEase(Ease.OutQuad);
+        }
+
+    }
+    void MoveComplete()
+    {
+        moving = false;
+    }
+
+    void RotateLeft()
+    {
+        if (!rotating)
+        {
+            rotating = true;
+            transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, 90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
+        }
+    }
+
+    void RotateRight()
+    {
+        if(!rotating)
+        {
+            rotating = true;
+            transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, -90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
+        }
+    }
+
+    void RotationComplete()
+    {
+        rotating = false;
     }
 
     void ChangeShape()
@@ -73,13 +140,14 @@ public class PlayerController : MonoBehaviour
         } else
         {
             crowdMove.Kill();
+            OnCrowdMoveComplete();
         }
 
         int gridIndex = 0;
         foreach (SpriteRenderer gridElement in gridElements)
         {
             gridElement.transform.localPosition = new Vector3(shapeToMake[gridIndex].x, 0f, shapeToMake[gridIndex].y);
-            crowdMove.Insert(0f, gridElement.DOColor(new Color(1f, 1f, 1f, 1f), 0.5f));
+            gridElement.DOColor(new Color(1f, 1f, 1f, 1f), 0.75f);
             gridIndex++;
         }
 
@@ -91,16 +159,17 @@ public class PlayerController : MonoBehaviour
             personIndex++;
         }
 
-        crowdMove.OnComplete(OnAnimationComplete);
+        crowdMove.OnComplete(OnCrowdMoveComplete);
 
         crowdMove.Play();
     }
 
-    void OnAnimationComplete()
+    void OnCrowdMoveComplete()
     {
+
         foreach (SpriteRenderer gridElement in gridElements)
         {
-            gridElement.DOColor(new Color(1f, 1f, 1f, 0f), 0.5f);
+            gridElement.DOColor(new Color(1f, 1f, 1f, 0f), 0.1f);
         }
     }
 }
