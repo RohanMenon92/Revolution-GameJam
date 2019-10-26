@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
+    public int movementRange;
+    [SerializeField]
     public List<Vector2> shapeList1;
     [SerializeField]
     public List<Vector2> shapeList2;
@@ -14,6 +16,10 @@ public class PlayerController : MonoBehaviour
     bool rotating = false;
     bool moving = false;
 
+    public float xMax = 0;
+    public float xMin = 0;
+    public float yMax = 0;
+    public float yMin = 0;
 
     List<List<Vector2>> shapeList;
     Sequence crowdMove;
@@ -31,23 +37,18 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // Local element declaration
-        gridElements = GetComponentInChildren<PlayerGrid>().GetComponentsInChildren<SpriteRenderer>();
-
-        foreach (SpriteRenderer gridElement in gridElements)
-        {
-            gridElement.color = new Color(1f, 1f, 1f, 0f);
-        }
-
-        crowds = GetComponentsInChildren<CrowdController>();
-
-
         // Defining Shapes
         currShapeIndex = 0;
         shapeList = new List<List<Vector2>>();
         shapeList.Add(shapeList1);
         shapeList.Add(shapeList2);
+
+
+        transform.position = new Vector3(0f,0f,0f);
+        // Local element declaration
+        initializeCrowd();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -77,24 +78,65 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void MoveLeft()
+    void initializeCrowd()
     {
-        if (!rotating)
+        gridElements = GetComponentInChildren<PlayerGrid>().GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer gridElement in gridElements)
         {
-            moving = true;
-            transform.DOLocalMove((transform.localPosition + new Vector3(-1f, 0, 0)), 0.25f).OnComplete(MoveComplete).SetEase(Ease.OutQuad);
+            gridElement.color = new Color(1f, 1f, 1f, 0f);
         }
 
+        crowds = GetComponentsInChildren<CrowdController>();
+
+        foreach (CrowdController person in crowds)
+        {
+            if (xMax < person.transform.position.x)
+            {
+                xMax = person.transform.position.x;
+            }
+            if (xMin > person.transform.position.x)
+            {
+                xMin = person.transform.position.x;
+            }
+            if (yMax < person.transform.position.z)
+            {
+                yMax = person.transform.position.z;
+            }
+            if (yMin > person.transform.position.z)
+            {
+                yMin = person.transform.position.z;
+            }
+        }
     }
 
-    void MoveRight()
+    void MoveLeft(float amount = 1f)
     {
         if (!moving)
         {
-            moving = true;
-            transform.DOLocalMove((transform.localPosition + new Vector3(1f, 0, 0)), 0.25f).OnComplete(MoveComplete).SetEase(Ease.OutQuad);
+            float limit = transform.localPosition.x + xMin;
+            if (limit > -movementRange/2)
+            {
+                moving = true;
+                transform.DOLocalMove((transform.localPosition + new Vector3(-amount, 0, 0)), 0.25f).SetEase(Ease.OutQuad).OnComplete(MoveComplete);
+            }
         }
+    }
 
+    void MoveRight(float amount = 1f)
+    {
+        if (!moving)
+        {
+            float limit = transform.localPosition.x + xMax;
+            Debug.Log("Limit " + limit);
+            Debug.Log("Range " + ((movementRange / 2) - 1));
+
+            if (limit < (movementRange / 2) - 1)
+            {
+                moving = true;
+                transform.DOLocalMove((transform.localPosition + new Vector3(amount, 0, 0)), 0.25f).SetEase(Ease.OutQuad).OnComplete(MoveComplete);
+            }
+        }
     }
     void MoveComplete()
     {
@@ -103,19 +145,56 @@ public class PlayerController : MonoBehaviour
 
     void RotateLeft()
     {
-        if (!rotating)
+        if(rotating)
         {
-            rotating = true;
-            transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, 90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
+            return;
+        }
+
+        Debug.Log("Rotate Left xMax / yMax");
+
+        var temp = xMax;
+        xMax = yMax;
+        yMax = temp;
+        temp = xMin;
+        xMin = yMin;
+        yMin = temp;
+        rotating = true;
+        transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, 90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
+        if (xMax > movementRange / 2 - 1 - transform.localPosition.x)
+        {
+            MoveLeft(xMax);
+        }
+
+        if (xMin < -movementRange / 2 - transform.localPosition.x)
+        {
+            MoveRight(-xMin);
         }
     }
 
     void RotateRight()
     {
-        if(!rotating)
+        if(rotating)
         {
-            rotating = true;
-            transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, -90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
+            return;
+        }
+        Debug.Log("Rotate Right xMax / yMax");
+
+        rotating = true;
+        var temp = xMax;
+        xMax = yMax;
+        yMax = temp;
+        temp = xMin;
+        xMin = yMin;
+        yMin = temp;
+        transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, -90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
+        if (xMax > movementRange / 2 - 1 - transform.localPosition.x)
+        {
+            MoveLeft(xMax);
+        }
+
+        if (xMin < -movementRange / 2 - transform.localPosition.x)
+        {
+            MoveRight(-xMin);
         }
     }
 
@@ -126,6 +205,10 @@ public class PlayerController : MonoBehaviour
 
     void ChangeShape()
     {
+        if (rotating)
+        {
+            return;
+        }
 
         currShapeIndex++;
         if(currShapeIndex > shapeList.Count - 1)
@@ -136,12 +219,9 @@ public class PlayerController : MonoBehaviour
 
         if(crowdMove != null)
         {
-            crowdMove = DOTween.Sequence();
-        } else
-        {
             crowdMove.Kill();
-            OnCrowdMoveComplete();
         }
+        crowdMove = DOTween.Sequence();
 
         int gridIndex = 0;
         foreach (SpriteRenderer gridElement in gridElements)
@@ -153,10 +233,51 @@ public class PlayerController : MonoBehaviour
 
 
         int personIndex = 0;
-        foreach(CrowdController person in crowds)
+        xMax = 0;
+        xMin = 0;
+        yMax = 0;
+        yMin = 0;
+        foreach (CrowdController person in crowds)
         {
+            if (xMax < shapeToMake[personIndex].x)
+            {
+                xMax = shapeToMake[personIndex].x;
+            }
+            if (xMin > shapeToMake[personIndex].x)
+            {
+                xMin = shapeToMake[personIndex].x;
+            }
+            if (yMax < shapeToMake[personIndex].y)
+            {
+                yMax = shapeToMake[personIndex].y;
+            }
+            if (yMin > shapeToMake[personIndex].y)
+            {
+                yMin = shapeToMake[personIndex].y;
+            }
+
             crowdMove.Insert(personIndex * 0.1f, person.transform.DOLocalMove(new Vector3(shapeToMake[personIndex].x, 0, shapeToMake[personIndex].y), 1f)).SetEase(Ease.OutBack);
             personIndex++;
+        }
+
+        if (Mathf.Round(transform.rotation.eulerAngles.y) == 90f || Mathf.Round(transform.rotation.eulerAngles.y) == 270f)
+        {   
+            var temp = xMax;
+            xMax = yMax;
+            yMax = temp;
+            temp = xMin;
+            xMin = yMin;
+            yMin = temp;
+        }
+
+        if (xMax > movementRange/2-1 - transform.localPosition.x)
+        {
+            MoveLeft();
+        }
+
+        if (xMin < -movementRange / 2 - transform.localPosition.x)
+        {
+            MoveRight();
         }
 
         crowdMove.OnComplete(OnCrowdMoveComplete);
@@ -166,7 +287,6 @@ public class PlayerController : MonoBehaviour
 
     void OnCrowdMoveComplete()
     {
-
         foreach (SpriteRenderer gridElement in gridElements)
         {
             gridElement.DOColor(new Color(1f, 1f, 1f, 0f), 0.1f);
