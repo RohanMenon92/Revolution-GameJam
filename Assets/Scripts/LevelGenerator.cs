@@ -9,7 +9,7 @@ public class LevelGenerator : MonoBehaviour
 
     public float startZValue;
     public Transform worldSpace;
-
+    public float spacingInLevel = 11f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
             instantiatedLevel.transform.rotation = Quaternion.Euler(0, 90f, 0);
             instantiatedLevel.transform.localPosition = new Vector3(-4.5f, 0, startZValue);
 
-            startZValue += 11f;
+            startZValue += spacingInLevel;
         }
     }
 

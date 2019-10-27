@@ -539,6 +539,7 @@ MonoBehaviour:
   - {fileID: 7379510088388662339, guid: 401edbb63aa547e48a3c04e3d0cbf77b, type: 3}
   startZValue: 50
   worldSpace: {fileID: 1640342586}
+  spacingInLevel: 11
 --- !u!4 &1797870017
 Transform:
   m_ObjectHideFlags: 0
@@ -582,6 +583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207e33ec391f21640a87ec3ef1ec194b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
+  boost: 0
 --- !u!4 &2050485989
 Transform:
   m_ObjectHideFlags: 0
@@ -665,159 +668,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
         type: 3}
-      propertyPath: shapeList1.Array.data[0].x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[0].y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[1].x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[1].y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[2].y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[2].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[3].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[3].y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList1.Array.data[4].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList2.Array.data[0].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList2.Array.data[0].y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList2.Array.data[3].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList2.Array.data[3].y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList2.Array.data[4].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList3.Array.data[0].x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList3.Array.data[0].y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList3.Array.data[1].y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList3.Array.data[3].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList3.Array.data[4].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList3.Array.data[4].y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList4.Array.data[0].x
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList4.Array.data[1].x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList4.Array.data[3].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList4.Array.data[4].x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList5.Array.data[0].y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList5.Array.data[0].x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList5.Array.data[1].y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList5.Array.data[3].x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: shapeList5.Array.data[4].y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478441739582211360, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 2050485988}
-    - target: {fileID: 4897114828718220530, guid: 75422f42ed6379d4fbb2afda88a1df6c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.49
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75422f42ed6379d4fbb2afda88a1df6c, type: 3}
 --- !u!1001 &8074505292810626315
