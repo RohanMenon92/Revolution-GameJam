@@ -15,4 +15,9 @@ public class PickUpScript : MonoBehaviour
     {
         
     }
+
+    public void OnPickUp()
+    {
+        this.enabled = false;
+    }
 }

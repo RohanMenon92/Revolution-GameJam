@@ -30,22 +30,25 @@ public class LevelCreator : MonoBehaviour
         }
 
         ////////////////////////// Add code to assign blocks here
-        block[0, 0] = 0;
-        block[0, 5] = 1;
-        block[0, 6] = 1;
-        block[0, 7] = 1;
-        block[1, 0] = 2;
-        block[1, 3] = 5;
-        block[1, 6] = 1;
-        block[1, 7] = 1;
+        block[0, 3] = -2;
+        block[1, 0] = 5;
+        block[2, 3] = 0;
+        block[2, 4] = 0;
+        block[2, 7] = 1;
+        block[3, 0] = 5;
+        block[3, 3] = 0;
         block[3, 4] = 0;
-        block[4, 3] = -2;
-        block[4, 4] = 0;
+        block[3, 7] = 2;
+        block[4, 3] = 1;
+        block[4, 4] = 1;
+        block[5, 0] = 5;
+        block[5, 3] = 0;
         block[5, 4] = 0;
+        block[5, 7] = 2;
         block[6, 3] = 0;
         block[6, 4] = 0;
 
-        levelTransform.name = "Level2";
+        levelTransform.name = "Level6";
         ///////////////////////
 
 
@@ -89,9 +92,11 @@ public class LevelCreator : MonoBehaviour
 
     void CreatePrefab(GameObject objectToCreate, float i, float j)
     {
+#if UNITY_EDITOR
         GameObject instantiatedObject = (GameObject)UnityEditor.PrefabUtility.InstantiatePrefab(objectToCreate, levelTransform);
 
         instantiatedObject.transform.localPosition = new Vector3(i, 0, j);
+#endif
     }
 
     // Update is called once per frame

@@ -32,6 +32,7 @@ public class CrowdController : MonoBehaviour
 
         if(collision.transform.tag == "PickUp")
         {
+            collision.transform.GetComponent<PickUpScript>().OnPickUp();
             this.GetComponentInParent<PlayerController>().OnPickUpHit(transform);
         }
 

@@ -24,11 +24,12 @@ public class PlayerController : MonoBehaviour
     bool rotating = false;
     bool moving = false;
 
-
     float xMax = 0;
     float xMin = 0;
     float yMax = 0;
     float yMin = 0;
+
+    int totalCrowdCount = 5;
 
     List<List<Vector2>> shapeList;
     Sequence crowdMove;
@@ -140,8 +141,6 @@ public class PlayerController : MonoBehaviour
         if (!moving)
         {
             float limit = transform.localPosition.x + xMax;
-            Debug.Log("Limit " + limit);
-            Debug.Log("Range " + ((movementRange / 2) - 1));
 
             if (limit < (movementRange / 2) - 1)
             {
@@ -161,8 +160,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
-        Debug.Log("Rotate Left xMax / yMax");
 
         var temp = xMax;
         xMax = yMax;
@@ -189,7 +186,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Rotate Right xMax / yMax");
 
         rotating = true;
         var temp = xMax;
@@ -307,8 +303,21 @@ public class PlayerController : MonoBehaviour
 
     public void OnObstacleHit(Transform crowdElement)
     {
-        crowdElement.SetParent(transform.parent, true);
-        crowdElement.GetComponent<Rigidbody>().isKinematic = false;
+        Transform duplicatedElement = GameObject.Instantiate(crowdElement);
+        crowdElement.gameObject.SetActive(false);
+        crowdElement.gameObject.GetComponent<Collider>().enabled = false;
+        totalCrowdCount--;
+
+        if(totalCrowdCount == 0)
+        {
+            gameController.GameOver();
+            return;
+        }
+        
+        duplicatedElement.SetParent(FindObjectOfType<LevelController>().transform, true);
+        duplicatedElement.GetComponent<Rigidbody>().isKinematic = false;
+        duplicatedElement.GetComponent<CrowdController>().enabled = false;
+
         int index = 0;
         foreach(CrowdController person in crowds)
         {
@@ -319,16 +328,35 @@ public class PlayerController : MonoBehaviour
             index++;
         }
 
-        gridElements[index].gameObject.SetActive(false);
+        gridElements[index].enabled = false;
+
         // TODO: Make this better
     }
 
     public void OnPickUpHit(Transform crowdElement)
     {
         // TODO: Add back/ReEnable a player if lost
+        if(totalCrowdCount < 5)
+        {
+            totalCrowdCount++;
+            int crowdIndex = 0;
+            foreach(CrowdController crowdEntity in crowds)
+            {
+                if (!crowdEntity.gameObject.activeInHierarchy)
+                {
+                    crowdEntity.gameObject.SetActive(true);
+                    crowdElement.gameObject.GetComponent<Collider>().enabled = true;
 
-        gameController.IncrementBoost();
-        gameController.IncrementBoost();
+                    break;
+                }
+                crowdIndex++;
+            }
+
+            gridElements[crowdIndex].enabled = true;
+        } else
+        {
+            gameController.IncrementBoost();
+        }
     }
 
     public void OnSmokeTriggerHit(Transform crowdElement)

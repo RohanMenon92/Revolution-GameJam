@@ -21,7 +21,10 @@ public class LevelController : MonoBehaviour
 
         if(transform.localPosition.z < -15)
         {
-            gameController.IncrementScore();
+            if(gameController != null)
+            {
+                gameController.IncrementScore();
+            }
         } 
     }
 }
