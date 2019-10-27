@@ -148,7 +148,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crowd
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6227636084027387583, guid: b131201ea7251474d85b145f464ea30a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b131201ea7251474d85b145f464ea30a, type: 3}
 --- !u!4 &3916351483356921604 stripped
 Transform:

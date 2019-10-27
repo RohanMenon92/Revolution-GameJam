@@ -71,21 +71,20 @@ public class PlayerController : MonoBehaviour
         {
             ChangeShape();
         }
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             RotateRight();
-        }
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
         {
             RotateLeft();
         }
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveLeft();
         }
 
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             MoveRight();
         }
@@ -308,7 +307,19 @@ public class PlayerController : MonoBehaviour
 
     public void OnObstacleHit(Transform crowdElement)
     {
-        crowdElement.gameObject.SetActive(false);
+        crowdElement.SetParent(transform.parent, true);
+        crowdElement.GetComponent<Rigidbody>().isKinematic = false;
+        int index = 0;
+        foreach(CrowdController person in crowds)
+        {
+            if(person.transform == crowdElement)
+            {
+                break;
+            }
+            index++;
+        }
+
+        gridElements[index].gameObject.SetActive(false);
         // TODO: Make this better
     }
 
