@@ -19,7 +19,7 @@ public class LevelCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int[,] block = new int [8,20];
+        int[,] block = new int [8,8];
 
         for (int i = 0; i < 8; i++)
         {
@@ -30,21 +30,22 @@ public class LevelCreator : MonoBehaviour
         }
 
         ////////////////////////// Add code to assign blocks here
-        block[1, 0] = -2;
-        block[1, 5] = 0;
-        block[1, 6] = 0;
-        block[1, 7] = 0;
-        block[2, 5] = 5;
-        block[3, 0] = 1;
-        block[4, 0] = 3;
-        block[4, 5] = 5;
-        block[5, 0] = 2;
-        block[5, 1] = 2;
-        block[6, 3] = 5;
-        block[6, 6] = 0;
-        block[6, 7] = 0;
+        block[0, 0] = 0;
+        block[0, 5] = 1;
+        block[0, 6] = 1;
+        block[0, 7] = 1;
+        block[1, 0] = 2;
+        block[1, 3] = 5;
+        block[1, 6] = 1;
+        block[1, 7] = 1;
+        block[3, 4] = 0;
+        block[4, 3] = -2;
+        block[4, 4] = 0;
+        block[5, 4] = 0;
+        block[6, 3] = 0;
+        block[6, 4] = 0;
 
-        levelTransform.name = "Level4";
+        levelTransform.name = "Level2";
         ///////////////////////
 
 
@@ -89,6 +90,7 @@ public class LevelCreator : MonoBehaviour
     void CreatePrefab(GameObject objectToCreate, float i, float j)
     {
         GameObject instantiatedObject = (GameObject)UnityEditor.PrefabUtility.InstantiatePrefab(objectToCreate, levelTransform);
+
         instantiatedObject.transform.localPosition = new Vector3(i, 0, j);
     }
 

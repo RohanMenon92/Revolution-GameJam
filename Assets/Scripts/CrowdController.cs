@@ -17,4 +17,23 @@ public class CrowdController : MonoBehaviour
     {
         
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.tag == "Obstacle")
+        {
+            this.GetComponentInParent<PlayerController>().OnObstacleHit(transform);
+        }
+
+        if(collision.transform.tag == "SmokeTrigger")
+        {
+            this.GetComponentInParent<PlayerController>().OnSmokeTriggerHit(transform);
+        }
+
+        if(collision.transform.tag == "PickUp")
+        {
+            this.GetComponentInParent<PlayerController>().OnPickUpHit(transform);
+        }
+
+    }
 }

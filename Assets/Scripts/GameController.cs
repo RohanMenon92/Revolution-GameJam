@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public int score = 0;
+    public int boost = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,15 @@ public class GameController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void IncrementScore()
+    {
+        // Cleared a level
+        score+=10;
+    }
+    public void IncrementBoost()
+    {
+        boost+=10;
     }
 }

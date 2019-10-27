@@ -11,20 +11,30 @@ public class PlayerController : MonoBehaviour
     public List<Vector2> shapeList1;
     [SerializeField]
     public List<Vector2> shapeList2;
+    [SerializeField]
+    public List<Vector2> shapeList3;
+    [SerializeField]
+    public List<Vector2> shapeList4;
+    [SerializeField]
+    public List<Vector2> shapeList5;
+
+    public GameController gameController;
 
     int currShapeIndex = 0;
     bool rotating = false;
     bool moving = false;
 
-    public float xMax = 0;
-    public float xMin = 0;
-    public float yMax = 0;
-    public float yMin = 0;
+
+    float xMax = 0;
+    float xMin = 0;
+    float yMax = 0;
+    float yMin = 0;
 
     List<List<Vector2>> shapeList;
     Sequence crowdMove;
     SpriteRenderer[] gridElements;
     CrowdController[] crowds;
+
     /// <summary>
     /// Will have the code for:
     /// 1.Taking input and moving left and right
@@ -42,6 +52,9 @@ public class PlayerController : MonoBehaviour
         shapeList = new List<List<Vector2>>();
         shapeList.Add(shapeList1);
         shapeList.Add(shapeList2);
+        shapeList.Add(shapeList3);
+        shapeList.Add(shapeList4);
+        shapeList.Add(shapeList5);
 
 
         transform.position = new Vector3(0f,0f,0f);
@@ -291,5 +304,24 @@ public class PlayerController : MonoBehaviour
         {
             gridElement.DOColor(new Color(1f, 1f, 1f, 0f), 0.1f);
         }
+    }
+
+    public void OnObstacleHit(Transform crowdElement)
+    {
+        crowdElement.gameObject.SetActive(false);
+        // TODO: Make this better
+    }
+
+    public void OnPickUpHit(Transform crowdElement)
+    {
+        // TODO: Add back/ReEnable a player if lost
+
+        gameController.IncrementBoost();
+        gameController.IncrementBoost();
+    }
+
+    public void OnSmokeTriggerHit(Transform crowdElement)
+    {
+        // TODO:Trigger Smoke for smoke tiles
     }
 }
