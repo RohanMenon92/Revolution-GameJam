@@ -19,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
             instantiatedLevel.transform.rotation = Quaternion.Euler(0, 90f, 0);
             instantiatedLevel.transform.localPosition = new Vector3(-4.5f, 0, startZValue);
 
-            startZValue += 25f;
+            startZValue += 11f;
         }
     }
 
