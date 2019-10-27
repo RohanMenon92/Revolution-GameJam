@@ -19,12 +19,10 @@ public class LevelController : MonoBehaviour
             transform.localPosition = transform.localPosition + new Vector3(0f, 0f, -levelSpeed);
         }
 
-        if(transform.localPosition.z < -15)
+        if(transform.localPosition.z < -15 && gameObject.activeInHierarchy && gameController != null)
         {
-            if(gameController != null)
-            {
-                gameController.IncrementScore();
-            }
+            gameObject.SetActive(false);
+            gameController.IncrementScore();
         } 
     }
 }

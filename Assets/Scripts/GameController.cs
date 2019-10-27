@@ -21,7 +21,10 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Time.frameCount % 300 == 0)
+        {
+            score += 1;
+        }
     }
 
     public void GameOver()

@@ -6,12 +6,12 @@ using UnityEngine;
 public class CurrentScoreTracker : MonoBehaviour
 {
     int score = 0;
-    public int scoreToAdd = 0;
     TextMeshProUGUI scoreText;
-    
+    GameController game;
     // Start is called before the first frame update
     void Start()
     {
+        game = FindObjectOfType<GameController>();
         scoreText = GetComponent<TextMeshProUGUI>();
         scoreText.text = "Current Score = " + score;
     }
@@ -19,7 +19,7 @@ public class CurrentScoreTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score += scoreToAdd;
+        score = game.score;
         scoreText.text = "Current Score = " + score;
     }
 }
