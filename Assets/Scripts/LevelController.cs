@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    float levelSpeed = 0.075f;
+    float levelSpeed = 0.035f;
     GameController gameController = null;
     void Start()
     {

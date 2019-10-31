@@ -20,13 +20,13 @@ public class LevelGenerator : MonoBehaviour
         {
             GameObject instantiatedLevel = GameObject.Instantiate(levelPrefab, worldSpace);
             instantiatedLevel.transform.rotation = Quaternion.Euler(0, 90f, 0);
-            instantiatedLevel.transform.localPosition = new Vector3(-4.5f, 0, startZValue);
+            instantiatedLevel.transform.localPosition = new Vector3(-4.5f, 0.3f, startZValue);
 
             startZValue += spacingInLevel;
 
             int sceneryCounter = Random.Range(0, sceneryObjects.Length);
             GameObject instantiatedScenery = GameObject.Instantiate(sceneryObjects[sceneryCounter], worldSpace);
-            instantiatedScenery.transform.localPosition = new Vector3(-8f, 0, startZValue);
+            instantiatedScenery.transform.localPosition = new Vector3(-9f, 0.3f, startZValue);
             instantiatedScenery.transform.SetParent(instantiatedLevel.transform);
         }
 
