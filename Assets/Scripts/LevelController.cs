@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     float levelSpeed = 0.075f;
-    GameController gameController;
+    GameController gameController = null;
     void Start()
     {
         gameController = FindObjectOfType<GameController>();
@@ -18,11 +18,14 @@ public class LevelController : MonoBehaviour
         {
             transform.localPosition = transform.localPosition + new Vector3(0f, 0f, -levelSpeed);
         }
-
-        if(transform.localPosition.z < -15 && gameObject.activeInHierarchy && gameController != null)
+        
+        if(transform.localPosition.z < -40 && gameObject.activeInHierarchy)
         {
-            gameObject.SetActive(false);
-            gameController.IncrementScore();
+            if(gameController.gameObject != null)
+            {
+                gameObject.SetActive(false);
+                gameController.IncrementScore();
+            }
         } 
     }
 }

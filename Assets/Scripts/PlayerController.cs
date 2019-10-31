@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
 
     public GameController gameController;
 
+    public AudioSource DamageSound;
+    public AudioSource PickupSound;
+    public AudioSource MovementSound;
+    public AudioSource MovementUpDownSound;
+
     int currShapeIndex = 0;
     bool rotating = false;
     bool moving = false;
@@ -130,6 +135,7 @@ public class PlayerController : MonoBehaviour
             float limit = transform.localPosition.x + xMin;
             if (limit > -movementRange/2)
             {
+                MovementUpDownSound.Play();
                 moving = true;
                 transform.DOLocalMove((transform.localPosition + new Vector3(-amount, 0, 0)), 0.25f).SetEase(Ease.OutQuad).OnComplete(MoveComplete);
             }
@@ -144,6 +150,7 @@ public class PlayerController : MonoBehaviour
 
             if (limit < (movementRange / 2) - 1)
             {
+                MovementUpDownSound.Play();
                 moving = true;
                 transform.DOLocalMove((transform.localPosition + new Vector3(amount, 0, 0)), 0.25f).SetEase(Ease.OutQuad).OnComplete(MoveComplete);
             }
@@ -168,6 +175,9 @@ public class PlayerController : MonoBehaviour
         xMin = yMin;
         yMin = temp;
         rotating = true;
+
+        MovementSound.Play();
+
         transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, 90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
         if (xMax > movementRange / 2 - 1 - transform.localPosition.x)
         {
@@ -195,6 +205,9 @@ public class PlayerController : MonoBehaviour
         xMin = yMin;
         yMin = temp;
         transform.DORotate((transform.rotation.eulerAngles + new Vector3(0, -90f, 0)), 0.5f).OnComplete(RotationComplete).SetEase(Ease.OutQuad);
+
+        MovementSound.Play();
+
         if (xMax > movementRange / 2 - 1 - transform.localPosition.x)
         {
             MoveLeft(xMax);
@@ -290,6 +303,8 @@ public class PlayerController : MonoBehaviour
 
         crowdMove.OnComplete(OnCrowdMoveComplete);
 
+        MovementSound.Play();
+
         crowdMove.Play();
     }
 
@@ -303,6 +318,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnObstacleHit(Transform crowdElement)
     {
+        DamageSound.Play();
+
         Transform duplicatedElement = GameObject.Instantiate(crowdElement);
         crowdElement.gameObject.SetActive(false);
         crowdElement.gameObject.GetComponent<Collider>().enabled = false;
@@ -335,6 +352,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnPickUpHit(Transform crowdElement)
     {
+        PickupSound.Play();
         // TODO: Add back/ReEnable a player if lost
         if(totalCrowdCount < 5)
         {

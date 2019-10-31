@@ -20,6 +20,11 @@ public class CrowdController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(this.GetComponentInParent<PlayerController>() == null)
+        {
+            return;
+        }
+
         if(collision.transform.tag == "Obstacle")
         {
             this.GetComponentInParent<PlayerController>().OnObstacleHit(transform);

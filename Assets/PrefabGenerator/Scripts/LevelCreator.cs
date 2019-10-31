@@ -23,38 +23,28 @@ public class LevelCreator : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < 8; j++)
             {
-                block[i,j] = 10;
+                block[i,j] = 100;
             }
         }
 
         ////////////////////////// Add code to assign blocks here
-        block[0, 3] = -2;
-        block[1, 0] = 5;
-        block[2, 3] = 0;
-        block[2, 4] = 0;
-        block[2, 7] = 1;
-        block[3, 0] = 5;
-        block[3, 3] = 0;
-        block[3, 4] = 0;
-        block[3, 7] = 2;
-        block[4, 3] = 1;
-        block[4, 4] = 1;
-        block[5, 0] = 5;
-        block[5, 3] = 0;
-        block[5, 4] = 0;
-        block[5, 7] = 2;
-        block[6, 3] = 0;
-        block[6, 4] = 0;
 
-        levelTransform.name = "Level6";
+
+        block[0, 3] = 1;
+        block[1, 3] = 4;
+        block[4, 4] = 3;
+        block[5, 1] = 2;
+        block[5, 4] = 3;
+
+        levelTransform.name = "Level13";
         ///////////////////////
 
 
         for (int i = 0; i < 8; i++)
         {
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < 8; j++)
             {
                 switch(block[i, j])
                 {

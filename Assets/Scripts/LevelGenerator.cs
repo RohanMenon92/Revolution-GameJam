@@ -7,6 +7,9 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     public GameObject[] levelObjects;
 
+    [SerializeField]
+    public GameObject[] sceneryObjects;
+
     public float startZValue;
     public Transform worldSpace;
     public float spacingInLevel = 11f;
@@ -20,7 +23,14 @@ public class LevelGenerator : MonoBehaviour
             instantiatedLevel.transform.localPosition = new Vector3(-4.5f, 0, startZValue);
 
             startZValue += spacingInLevel;
+
+            int sceneryCounter = Random.Range(0, sceneryObjects.Length);
+            GameObject instantiatedScenery = GameObject.Instantiate(sceneryObjects[sceneryCounter], worldSpace);
+            instantiatedScenery.transform.localPosition = new Vector3(-8f, 0, startZValue);
+            instantiatedScenery.transform.SetParent(instantiatedLevel.transform);
         }
+
+
     }
 
 
