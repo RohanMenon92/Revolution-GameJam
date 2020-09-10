@@ -11,3 +11,8 @@ Video: https://youtu.be/vRA4_YSzVJQ
 - W,S : Move up and down
 - A,D : Rotate Left and Right
 - Space: Change crowd shape
+
+## Screenshots
+![Screen](https://github.com/RohanMenon92/Revolution-GameJam/blob/master/Screenshots/Rev1.PNG)
+![Shield2](https://github.com/RohanMenon92/Revolution-GameJam/blob/master/Screenshots/Rev2.PNG)
+![Gameplay](https://github.com/RohanMenon92/Revolution-GameJam/blob/master/Screenshots/Rev3.PNG)
